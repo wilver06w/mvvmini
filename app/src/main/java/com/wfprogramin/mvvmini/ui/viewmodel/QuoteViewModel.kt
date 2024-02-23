@@ -6,6 +6,7 @@ import com.wfprogramin.mvvmini.data.model.QuoteModel
 import androidx.lifecycle.viewModelScope
 import com.wfprogramin.mvvmini.domain.GetQuotesUseCase
 import com.wfprogramin.mvvmini.domain.GetRandomQuoteUseCase
+import com.wfprogramin.mvvmini.domain.model.Quote
 
 
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -18,7 +19,7 @@ class QuoteViewModel @Inject constructor(
     private val getRandomQuoteUseCase : GetRandomQuoteUseCase,
 ) : ViewModel() {
 
-    val quoteModel = MutableLiveData<QuoteModel>()
+    val quoteModel = MutableLiveData<Quote>()
     val isLoading = MutableLiveData<Boolean>()
 
     fun onCreate(){
@@ -34,6 +35,9 @@ class QuoteViewModel @Inject constructor(
     }
 
     fun randomQuote(){
+        viewModelScope.launch {
+
+
         isLoading.postValue(true)
         val quote = getRandomQuoteUseCase()
 
@@ -41,5 +45,6 @@ class QuoteViewModel @Inject constructor(
             quoteModel.postValue(quote ?: quote)
         }
         isLoading.postValue(false)
+    }
     }
 }
