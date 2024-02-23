@@ -4,7 +4,6 @@ import androidx.room.Room
 import com.wfprogramin.mvvmini.data.database.QuoteDatabase
 
 import android.content.Context
-import androidx.room.Database
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
